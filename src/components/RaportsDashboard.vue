@@ -58,7 +58,7 @@
     <b-table striped hover responsive outlined
              class="table-responsive"
              :fields="fields"
-             :items="items"
+             :items="testItems"
              :current-page="currentPage"
              :per-page="perPage"
              :filter="filter"
@@ -67,6 +67,14 @@
              :sort-by.sync="sortBy"
              :sort-desc.sync="sortDesc"
              :sort-direction="sortDirection">
+      <template v-slot:cell(hardware.NAME)="data">
+        <div v-if="data.item.hardware.NAME">{{data.item.hardware.NAME}}</div>
+        <div v-else>N/A</div>
+      </template>
+      <template v-slot:cell(hardware.LASTDATE)="data">
+        <div v-if="data.item.hardware.LASTDATE">{{data.item.hardware.LASTDATE}}</div>
+        <div v-else>N/A</div>
+      </template>
       <template v-slot:cell(actions)="data">
         <v-icon color="#438de9"
                 v-b-tooltip.hover title="Generate raport"
@@ -77,7 +85,7 @@
     <b-pagination v-if="dataLength > 10"
                   size="md"
                   class="ma-1"
-                  :total-rows="items.length"
+                  :total-rows="testItems.length"
                   v-model="currentPage"
                   :per-page="perPage"
                   @filtered="onFiltered">
@@ -98,24 +106,25 @@
           })
       },
       dataLength() {
-        return this.items.length
+        return this.testItems.length
       }
     },
     data() {
       return {
         fields: [
-          { key: 'hostname', label: 'Hostname' },
-          { key: 'issuedAt', label: 'Issued at' },
-          { key: 'status', label: 'Status' },
+          { key: 'hardware.NAME', label: 'Hostname' },
+          { key: 'hardware.LASTDATE', label: 'Issued at' },
+          // { key: 'status', label: 'Status' },
           { key: 'actions', label: 'Actions', thStyle: { textAlign: "center"}, tdClass: "text-center" }
         ],
-        items: [
-          { id: 1, hostname: 'test-test1', issuedAt: '14-09-2019 12:24:23', status: 'valid', _rowVariant: 'success' },
-          { id: 2, hostname: 'test-test2', issuedAt: '14-09-2019 13:24:23', status: 'invalid', _rowVariant: 'danger' },
-          { id: 3, hostname: 'test-test3', issuedAt: '14-09-2019 14:24:23', status: 'valid', _rowVariant: 'success' },
-          { id: 4, hostname: 'test-test4', issuedAt: '---', status: 'N/A' },
-          { id: 5, hostname: 'test-test5', issuedAt: '14-09-2019 16:24:23', status: 'valid', _rowVariant: 'success' },
-        ],
+        testItems: [],
+        // items: [
+        //   { id: 1, hostname: 'test-test1', issuedAt: '14-09-2019 12:24:23', status: 'valid', _rowVariant: 'success' },
+        //   { id: 2, hostname: 'test-test2', issuedAt: '14-09-2019 13:24:23', status: 'invalid', _rowVariant: 'danger' },
+        //   { id: 3, hostname: 'test-test3', issuedAt: '14-09-2019 14:24:23', status: 'valid', _rowVariant: 'success' },
+        //   { id: 4, hostname: 'test-test4', issuedAt: '---', status: 'N/A' },
+        //   { id: 5, hostname: 'test-test5', issuedAt: '14-09-2019 16:24:23', status: 'valid', _rowVariant: 'success' },
+        // ],
         perPage: 20,
         currentPage: 1,
         // Filter data
@@ -128,6 +137,8 @@
         sortDesc: false,
         sortDirection: 'asc',
         // Sorting data end
+        query_start: 0,
+        query_limit: 99
       }
     },
     methods: {
@@ -137,10 +148,38 @@
       onFiltered(filteredItems) {
         this.totalRows = filteredItems.length;
         this.currentPage = 1
+      },
+      // getIds(array) {
+      //   let ids = [];
+      //   for(let item of array) {
+      //     ids.push(item.ID)
+      //   }
+      //   return ids
+      // },
+      // getData() {
+      //   this.axios.get('http://192.168.208.3/ocsapi/v1/computers/listID')
+      //     .then( resp => {
+      //       let data = JSON.parse(resp.data);
+      //       console.log('resp', data);
+      //       this.computer_ids = this.getIds(data)
+      //     })
+      //     .catch( err => {
+      //       console.log('error')
+      //     })
+      // },
+      getData() {
+        this.axios.get(`http://192.168.208.3/ocsapi/v1/computers?start=${this.query_start}&limit=${this.query_limit}`)
+          .then( resp => {
+            let data = Object.values(JSON.parse(resp.data));
+            this.testItems = data;
+            this.totalRows = this.testItems.length
+          })
+          .catch( err => {
+          })
       }
     },
     mounted() {
-      this.totalRows = this.items.length
+      this.getData();
     }
   }
 </script>
