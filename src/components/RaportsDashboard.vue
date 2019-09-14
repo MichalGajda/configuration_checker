@@ -68,10 +68,9 @@
              :sort-desc.sync="sortDesc"
              :sort-direction="sortDirection">
       <template v-slot:cell(actions)="data">
-        <b-button @click="goToRaport(data.item.id)" variant="success">Go to</b-button>
-        <v-icon color="#28a745"
-                v-b-tooltip.hover title="Manage organization"
-                @click="goToRaport(data.item.id)">send</v-icon>
+        <v-icon color="#438de9"
+                v-b-tooltip.hover title="Generate raport"
+                @click="goToRaport(data.item.id)">picture_as_pdf</v-icon>
       </template>
     </b-table>
 
@@ -108,7 +107,7 @@
           { key: 'hostname', label: 'Hostname' },
           { key: 'issuedAt', label: 'Issued at' },
           { key: 'status', label: 'Status' },
-          { key: 'actions', label: 'Actions' }
+          { key: 'actions', label: 'Actions', thStyle: { textAlign: "center"}, tdClass: "text-center" }
         ],
         items: [
           { id: 1, hostname: 'test-test1', issuedAt: '14-09-2019 12:24:23', status: 'valid', _rowVariant: 'success' },
@@ -151,5 +150,8 @@
     width: 80vw;
     margin: 1.5rem auto;
     text-align: left;
+  }
+  .alignCenter {
+    text-align: center;
   }
 </style>
