@@ -148,7 +148,7 @@
         },
         methods: {
             onSubmit() {
-                // EventBus.$emit("requirements_setup", this.requirements);
+                this.$store.commit("setRequirements", this.requirements);
             },
             newItem(list, newItem) {
                 list.push(newItem)
