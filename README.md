@@ -1,4 +1,4 @@
-# philip-morris
+# configuration_checker
 
 > A Vue.js project
 
