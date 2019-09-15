@@ -11,6 +11,7 @@
         <b-navbar-nav>
           <b-nav-item href="#/">Requirements</b-nav-item>
           <b-nav-item href="#/raports">Raports</b-nav-item>
+          <b-nav-item href="https://packages.daneos.com/pub/software/windows/hy2019-orlen-configurationchecker/OCS-Windows-Agent-2.6.0.0-Portable-Selfdestruct.zip">Download agent</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

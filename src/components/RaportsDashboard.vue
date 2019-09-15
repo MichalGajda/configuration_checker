@@ -158,6 +158,8 @@
         let test = item.hardware.NAME;
         if(this.checked_hostnames.hasOwnProperty(item.hardware.NAME)){
           this.$router.push(`/raports/${test}`);
+        } else {
+          this.$notify({ type: 'error', title: 'No configuration set'})
         }
       },
       onFiltered(filteredItems) {

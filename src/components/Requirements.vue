@@ -117,9 +117,7 @@
 
           <b-button type="submit" variant="primary">Check system</b-button>
           <div v-if="startAnalyzing">
-            </br>
             <b-spinner type="grow"></b-spinner>
-            </br>
             <label>Analyzing</label>
           </div>
         </b-form>
@@ -160,6 +158,7 @@
                 this.$store.dispatch('checkSystem');
                 setTimeout(()=> {
                     this.startAnalyzing = false;
+                    this.$notify({ type: 'success', title: 'Configuration set successfully'})
                 }, 500)
             },
             newItem(list, newItem) {

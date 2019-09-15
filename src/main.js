@@ -8,10 +8,12 @@ import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Notifications from 'vue-notification'
 
 Vue.use(VueAxios, axios)
 Vue.use(Vuetify);
 Vue.use(BootstrapVue);
+Vue.use(Notifications)
 
 import {store} from "./store"
 
