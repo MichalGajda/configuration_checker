@@ -20,7 +20,7 @@
                         label-cols="2"
                         label-for="input-2">
             <b-form-input id="input-2"
-                          type="number"
+                          type="text"
                           v-model="requirements.hardware.osversion"
                           required
                           placeholder="Enter operation system version">
@@ -44,7 +44,7 @@
             </b-button>
             <b-table v-if="showSoftware"
                      class="top-2-margin"
-                     :items="requirements.software"
+                     :items="requirements.softwares"
                      :fields="softwareFields"
                      striped
                      responsive="sm">
@@ -60,12 +60,12 @@
                 </b-input>
               </template>
               <template v-slot:cell(action)="data">
-                <v-icon class="remove-icon" @click="removeItem(requirements.software, data.index)">
+                <v-icon class="remove-icon" @click="removeItem(requirements.softwares, data.index)">
                   remove_circle_outline
                 </v-icon>
               </template>
               <template slot="table-caption">
-                <v-icon class="add-icon" @click="newItem(requirements.software, {name: '', version: ''})">
+                <v-icon class="add-icon" @click="newItem(requirements.softwares, {name: '', version: ''})">
                   add_circle_outline
                 </v-icon>
               </template>
@@ -115,9 +115,9 @@
             </b-table>
           </b-form-group>
 
-          <b-button type="submit" variant="primary">Submit</b-button>
+          <b-button type="submit" variant="primary">Check system</b-button>
         </b-form>
-        <b-card class="mt-3" header="Form Data Result">
+        <b-card class="mt-3" header="Config preview">
           <pre class="m-0">{{ requirements }}</pre>
         </b-card>
       </div>
@@ -141,7 +141,7 @@
                         osversion: '',
                         arch: ''
                     },
-                    software: [],
+                    softwares: [],
                     runningprocess: []
                 },
             }
@@ -149,6 +149,7 @@
         methods: {
             onSubmit() {
                 this.$store.commit("setRequirements", this.requirements);
+                this.$store.dispatch('checkSystem');
             },
             newItem(list, newItem) {
                 list.push(newItem)

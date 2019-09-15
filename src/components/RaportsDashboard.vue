@@ -168,7 +168,7 @@
       //     })
       // },
       getData() {
-        this.axios.get(`http://192.168.208.3/ocsapi/v1/computers?start=${this.query_start}&limit=${this.query_limit}`)
+        this.axios.get(`http://192.168.56.101/ocsapi/v1/computers?start=${this.query_start}&limit=${this.query_limit}`)
           .then( resp => {
             let data = Object.values(JSON.parse(resp.data));
             this.testItems = data;
