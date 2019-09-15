@@ -132,7 +132,8 @@
         sortDirection: 'asc',
         // Sorting data end
         query_start: 0,
-        query_limit: 99
+        query_limit: 99,
+        checked_hostnames: undefined
       }
     },
     methods: {
@@ -152,9 +153,11 @@
             runningProcess: item.runningprocess
           };
           let filteredItem = {
-            hardware: item.hardware,
-            _rowVariant: item.validate ? 'success': 'danger'
+            hardware: item.hardware
           };
+          if(this.checked_hostnames.hasOwnProperty(item.hardware.NAME)) {
+            filteredItem._rowVariant = this.checked_hostnames[item.hardware.NAME].validate ? 'success': 'danger'
+          }
           this.fullData.push(fullItem);
           this.filteredItems.push(filteredItem)
         }
@@ -172,6 +175,7 @@
     },
     mounted() {
       this.getData();
+      this.checked_hostnames = this.$store.getters.check_status
     }
   }
 </script>

@@ -51,26 +51,30 @@
         showHardware: true,
         showSoftware: true,
         raportObject: {
-          hostname: 'cokolwiek',
-          hardware: [{
-            name: 'costam',
-            current: '1.11',
-            required: '1.13'
-          },
-          {
-            name: 'costam2',
-            current: '2.13',
-            required: '1.14'
-          }],
-          softwares: {
-            missingSoftware: [
-              'Apka1',
-              'Apka2',
-              'Apka3',
-              'Apka4',
-            ]
-          }
+          softwares: []
         }
+        // raportObject: {
+        //   hostname: 'cokolwiek',
+        //   hardware: [{
+        //     name: 'costam',
+        //     current: '1.11',
+        //     required: '1.13'
+        //   },
+        //   {
+        //     name: 'costam2',
+        //     current: '2.13',
+        //     required: '1.14'
+        //   }],
+        //   softwares: {
+        //     missingSoftware: [
+        //       'Apka1',
+        //       'Apka2',
+        //       'Apka3',
+        //       'Apka4',
+        //     ]
+        //   }
+        // },
+
       }
     },
     methods: {
@@ -80,6 +84,9 @@
       toggleSoftware() {
         this.showSoftware = !this.showSoftware
       }
+    },
+    mounted() {
+      this.raportObject = this.$store.getters.check_status
     }
   }
 </script>

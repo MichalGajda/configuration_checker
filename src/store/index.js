@@ -12,10 +12,13 @@ export const store = new Vuex.Store({
   mutations: {
     setRequirements(state, requirements) {
       state.requirements = requirements;
+    },
+    setCheckStatus(state, data) {
+      state.check_status = data
     }
   },
   actions: {
-    checkSystem({state, dispatch}) {
+    checkSystem({state, commit, dispatch}) {
       var check_status = {};
       axios.get('http://192.168.208.3/ocsapi/v1/computers?start=0&limit=99')
         .then(resp => {
@@ -93,7 +96,7 @@ export const store = new Vuex.Store({
                       "different": cont_different
                     };
                   }
-                  state.check_status = check_status;
+                  commit('setCheckStatus', check_status);
                 }
               }
               console.log(state.check_status);
@@ -122,6 +125,9 @@ export const store = new Vuex.Store({
   getters: {
     requirements(state) {
       return state.requirements;
+    },
+    check_status(state) {
+      return state.check_status;
     }
   }
 });
