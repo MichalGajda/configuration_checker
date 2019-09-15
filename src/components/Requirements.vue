@@ -116,6 +116,12 @@
           </b-form-group>
 
           <b-button type="submit" variant="primary">Check system</b-button>
+          <div v-if="startAnalyzing">
+            </br>
+            <b-spinner type="grow"></b-spinner>
+            </br>
+            <label>Analyzing</label>
+          </div>
         </b-form>
         <b-card class="mt-3" header="Config preview">
           <pre class="m-0">{{ requirements }}</pre>
@@ -130,6 +136,7 @@
         name: "Requirements",
         data() {
             return {
+                startAnalyzing: false,
                 archTypes: ["x86", "x86 64 bit"],
                 showSoftware: false,
                 showRunningProcess: false,
@@ -149,7 +156,11 @@
         methods: {
             onSubmit() {
                 this.$store.commit("setRequirements", this.requirements);
+                this.startAnalyzing = true;
                 this.$store.dispatch('checkSystem');
+                setTimeout(()=> {
+                    this.startAnalyzing = false;
+                }, 500)
             },
             newItem(list, newItem) {
                 list.push(newItem)

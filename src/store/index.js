@@ -88,8 +88,10 @@ export const store = new Vuex.Store({
                   } else {
                     let _different = check_status[host].different;
                     let cont_different = different.concat(_different);
+                    let _validate = check_status[host].validate;
+                    let cont_validate = validate && _validate;
                     check_status[host] = {
-                      "validate": validate,
+                      "validate": cont_validate,
                       "different": cont_different
                     };
                   }
