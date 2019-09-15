@@ -4,11 +4,6 @@ Vue.use(Router);
 
 export default new Router({
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'HelloWorld',
-    //   component: () => import('@/components/RaportsDashboard'),
-    // },
     {
       path: '/requirements',
       name: 'Requirements',
@@ -20,7 +15,7 @@ export default new Router({
       component: () => import('@/components/RaportsDashboard'),
     },
     {
-      path: '/raports/:id',
+      path: '/raports/:name',
       name: 'Raport',
       component: () => import('@/components/TestRaport'),
     }

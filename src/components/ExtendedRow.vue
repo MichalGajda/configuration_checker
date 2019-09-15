@@ -1,32 +1,4 @@
 <template>
-  <!--<b-container>-->
-    <!--<div v-for="object in value">-->
-      <!--<b-row><b>{{object.name}}</b></b-row>-->
-      <!--<b-row>-->
-        <!--<b-col>-->
-          <!--<b-form-group label="Required value:"-->
-                        <!--label-cols="4">-->
-            <!--<b-form-input v-model="object.required"-->
-                          <!--type="text"-->
-                          <!--disabled>-->
-            <!--</b-form-input>-->
-          <!--</b-form-group>-->
-        <!--</b-col>-->
-
-        <!--<b-col>-->
-          <!--<b-form-group label="Current value:"-->
-                        <!--label-cols="4">-->
-            <!--<b-form-input v-model="object.current"-->
-                          <!--type="text"-->
-                          <!--disabled>-->
-            <!--</b-form-input>-->
-          <!--</b-form-group>-->
-        <!--</b-col>-->
-      <!--</b-row>-->
-    <!--</div>-->
-
-  <!--</b-container>-->
-
   <b-container>
     <b-card v-for="object in value"
             class="mb-1"

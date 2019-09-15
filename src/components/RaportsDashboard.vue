@@ -138,7 +138,10 @@
     },
     methods: {
       goToRaport(item) {
-        this.$router.push(`/raports/${item.id}`)
+        let test = item.hardware.NAME;
+        if(this.checked_hostnames.hasOwnProperty(item.hardware.NAME)){
+          this.$router.push(`/raports/${test}`);
+        }
       },
       onFiltered(filteredItems) {
         this.totalRows = filteredItems.length;
