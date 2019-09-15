@@ -73,9 +73,17 @@ export const store = new Vuex.Store({
                           // if not installed if not add to differences
                           if (!installed) {
                             validate = false;
+                            let name = "Current not available";
+                            if (req === "softwares") {
+                              name = state.requirements[req][prop].name;
+                            }
+                            if (req === "runningprocess") {
+                              name = state.requirements[req][prop].processname;
+                            }
+
                             different.push({
                               "name": req,
-                              "required": state.requirements[req][prop].name,
+                              "required": name,
                               "current": "Not installed"
                             });
                           }

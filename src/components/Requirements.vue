@@ -124,6 +124,7 @@
         <b-card class="mt-3" header="Config preview">
           <pre class="m-0">{{ requirements }}</pre>
         </b-card>
+        <input type="file" id="file" ref="file" @change="loadConf()"/>
       </div>
     </div>
   </div>
@@ -152,6 +153,19 @@
             }
         },
         methods: {
+            loadConf() {
+                if (!!this.$refs.file) {
+                    if (!!this.$refs.file.files[0]) {
+                        let file = this.$refs.file.files[0];
+                        let reader = new FileReader();
+                        reader.addEventListener('load', this.setConf);
+                        reader.readAsText(file);
+                    }
+                }
+            },
+            setConf(event) {
+                this.requirements = JSON.parse(event.target.result);
+            },
             onSubmit() {
                 this.$store.commit("setRequirements", this.requirements);
                 this.startAnalyzing = true;
