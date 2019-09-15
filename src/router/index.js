@@ -5,7 +5,7 @@ Vue.use(Router);
 export default new Router({
   routes: [
     {
-      path: '/requirements',
+      path: '/',
       name: 'Requirements',
       component: () => import('@/components/Requirements'),
     },
