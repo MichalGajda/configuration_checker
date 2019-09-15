@@ -58,7 +58,7 @@ export const store = new Vuex.Store({
                             // check if installed
                             let check = true;
                             for (let key of Object.keys(state.requirements[req][prop])) {
-                              if (state.requirements[req][prop][key] !== _prop[key]) {
+                              if (state.requirements[req][prop][key] !== _prop[key.toUpperCase()]) {
                                 check = false;
                               }
                             }

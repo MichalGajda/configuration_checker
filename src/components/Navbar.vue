@@ -3,7 +3,7 @@
     <b-navbar toggleable="lg" type="dark" class="orlen-color">
       <b-navbar-brand href="#">Qubit</b-navbar-brand>
       <!--  On the middle  -->
-      <b-navbar-brand class="brand-center"> CONFIGURATION CHECKER </b-navbar-brand>
+      <b-navbar-brand class="brand-center"> <b> CONFIGURATION CHECKER </b> </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
