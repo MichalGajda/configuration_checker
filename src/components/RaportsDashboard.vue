@@ -78,7 +78,7 @@
       <template v-slot:cell(actions)="data">
         <v-icon color="#438de9"
                 v-b-tooltip.hover title="Generate raport"
-                @click="goToRaport(data.item.id)">picture_as_pdf</v-icon>
+                @click="generateRaport(data.item.hardware.NAME)">picture_as_pdf</v-icon>
       </template>
     </b-table>
 
@@ -94,6 +94,9 @@
 </template>
 
 <script>
+  import jsPDF from 'jspdf';
+  import 'jspdf-autotable';
+
   export default {
     name: "RaportsDashboard",
     computed: {
@@ -137,6 +140,20 @@
       }
     },
     methods: {
+      generateRaport(id) {
+        let pdfGenerator = new jsPDF();
+        let results = this.$store.getters.check_status[id].different;
+        let body = [];
+        for (let result of results) {
+           body.push([result.name, result.current, result.required])
+        }
+        pdfGenerator.text(7, 7, id);
+        pdfGenerator.autoTable({
+            head: [['Name', 'Current', 'Requirements']],
+            body: body
+        });
+        pdfGenerator.save(`${id}.pdf`);
+      },
       goToRaport(item) {
         let test = item.hardware.NAME;
         if(this.checked_hostnames.hasOwnProperty(item.hardware.NAME)){
