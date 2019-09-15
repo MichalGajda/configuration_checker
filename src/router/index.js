@@ -22,7 +22,7 @@ export default new Router({
     {
       path: '/raports/:id',
       name: 'Raport',
-      component: () => import('@/components/Raport'),
+      component: () => import('@/components/TestRaport'),
     }
   ]
 })
